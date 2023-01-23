@@ -1,0 +1,16 @@
+* {
+    font-family: 'Alexandria', sans-serif;
+    font-weight: 300;
+}
+.heading {
+    text-transform: uppercase;
+    letter-spacing: .2rem;
+    font-weight: 500;
+}
+
+.main-form {
+    background-image: linear-gradient(rgba(80, 80, 80, 0.3), rgba(80, 80, 80, 0.3)), url("/resources/images/main_img.jpg");
+    background-size: cover;
+}
+
+
