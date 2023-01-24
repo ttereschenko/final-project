@@ -19,15 +19,12 @@ use Illuminate\Support\Facades\Route;
 
 Route::get('/', [MainController::class, 'index'])->name('main');
 
-Route::get('/about', [MainController::class, 'about'])->name('about');
-
 Route::get('/register', [RegisterController::class, 'registerForm'])->name('register.form');
 Route::post('/register', [RegisterController::class, 'register'])->name('register');
 
 Route::get('/verified_email/{id}/{hash}', [RegisterController::class, 'verifyEmail'])->name('verify.email');
 
 Route::controller(AuthController::class)->group(function () {
-
     Route::get('/login',  'loginForm')->name('login.form');
     Route::post('/login', 'login')->name('login');
 

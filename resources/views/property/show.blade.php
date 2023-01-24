@@ -4,20 +4,34 @@
 
 @section('content')
     <div class="container my-4">
-        <div class="d-flex justify-content-between">
-            <h3 class="heading">{{ $property->title }}</h3>
-            @can('addToWishlist', $property)
-            <form action="{{ route('wishlist.add', ['property' => $property->id]) }}" method="post">
-                @csrf
-                <button class="btn btn-sm border-bottom px-2 me-1">
-                    <i class="bi bi-heart me-2"></i>Add to Wishlist
-                </button>
-            </form>
-            @endcan
+        <div class="row d-flex justify-content-between">
+            <h3 class="heading col-10">{{ $property->title }}</h3>
+            <div class="col-2">
+            @favourite($property)
+                @can('deleteFromWishlist', $property)
+                    <form action="{{ route('wishlist.delete', ['property' => $property->id]) }}" method="post">
+                        @csrf
+                        <button class="btn btn-sm border-bottom px-2 me-1">
+                            <i class="bi bi-heart-fill wishlistActive me-2"></i>Delete from Wishlist
+                        </button>
+                    </form>
+                @endcan
+            @endfavourite
+            @notFavourite($property)
+                @can('addToWishlist', $property)
+                    <form action="{{ route('wishlist.add', ['property' => $property->id]) }}" method="post">
+                        @csrf
+                        <button class="btn btn-sm border-bottom px-2 me-1">
+                            <i class="bi bi-heart me-2"></i>Add to Wishlist
+                        </button>
+                    </form>
+                @endcan
+            @endnotFavourite
             @can('edit', $property)
                 <a href="{{ route('property.edit.form', ['property' => $property->id]) }}" class="btn btn-dark fw-light mb-1 px-5">
                     <i class="bi bi-pencil-square me-2"></i>Edit</a>
             @endcan
+            </div>
         </div>
         <p class="text-muted">Location: {{ $property->country }}, {{ $property->city }}</p>
         <div class="row my-3">

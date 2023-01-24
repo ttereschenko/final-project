@@ -13,4 +13,6 @@
     background-size: cover;
 }
 
-
+.wishlistActive {
+    color: rgba(255, 1, 98, 0.88);
+}

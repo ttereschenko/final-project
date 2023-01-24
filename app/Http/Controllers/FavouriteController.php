@@ -2,11 +2,8 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\Amenity;
-use App\Models\Facility;
 use App\Models\Favourite;
 use App\Models\Property;
-use App\Models\Type;
 use App\Services\FavouriteService;
 
 class FavouriteController extends Controller

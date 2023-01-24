@@ -28,26 +28,25 @@
                         </form>
                     @endcan
                 </div>
-                <small class="text-muted pt-2">{{ $property->created_at?->format('d M Y') }}</small>
+                <div>
+                    @notFavourite($property)
+                    @can('addToWishlist', $property)
+                        <form action="{{ route('wishlist.add', ['property' => $property->id]) }}" method="post">
+                            @csrf
+                            <button class="btn  p-0"><i class="bi bi-heart"></i></button>
+                        </form>
+                    @endcan
+                    @endnotFavourite
+                    @favourite($property)
+                    @can('deleteFromWishlist', $property)
+                        <form action="{{ route('wishlist.delete', ['property' => $property->id]) }}" method="post">
+                            @csrf
+                            <button class="btn p-0"><i class="bi bi-heart-fill wishlistActive"></i></button>
+                        </form>
+                    @endcan
+                    @endfavourite
+                </div>
             </div>
-            @can('addToWishlist', $property)
-{{--                TODO: WISHLIST BTN (ADD/DELETE) --}}
-                <div id="wishlist"></div>
-            <form action="{{ route('wishlist.add', ['property' => $property->id]) }}" method="post">
-                @csrf
-                <button class="btn btn-sm addToWishlist">
-                    <i class="bi bi-heart"></i>ADD
-                </button>
-            </form>
-            @endcan
-            @can('deleteFromWishlist', $property)
-            <form action="{{ route('wishlist.delete', ['property' => $property->id]) }}" method="post">
-                @csrf
-                <button class="btn btn-sm deleteFromWishlist">
-                    <i class="bi bi-heart-fill"></i>DELETE
-                </button>
-            </form>
-            @endcan
         </div>
     </div>
 </div>

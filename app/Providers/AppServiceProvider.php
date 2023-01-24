@@ -2,6 +2,7 @@
 
 namespace App\Providers;
 
+use App\Models\Favourite;
 use App\Models\User;
 use Illuminate\Pagination\Paginator;
 use Illuminate\Support\Facades\Blade;
@@ -38,6 +39,24 @@ class AppServiceProvider extends ServiceProvider
 
         Blade::if('guest', function () {
             return auth()?->user()?->role === User::ROLE_GUEST;
+        });
+
+        Blade::if('favourite', function ($property) {
+            $user = auth()->user();
+            $favourite = Favourite::query()
+                ->where('property_id', '=', $property->id)
+                ->where('user_id', '=', $user->id);
+
+            return $favourite->exists();
+        });
+
+        Blade::if('notFavourite', function ($property) {
+            $user = auth()->user();
+            $favourite = Favourite::query()
+                ->where('property_id', '=', $property->id)
+                ->where('user_id', '=', $user->id);
+
+            return !$favourite->exists();
         });
     }
 }

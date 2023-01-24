@@ -14,6 +14,6 @@ import './bootstrap';
 
 import './components/Example';
 
-import './components/WishlistButton';
-
 import './components/Carousel';
+
+
