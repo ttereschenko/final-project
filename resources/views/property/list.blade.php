@@ -30,13 +30,13 @@
                                placeholder="Where do you want to go?" name="location" value="{{ request()->get('location') }}">
                         <label class="text-muted" for="location"><i class="bi bi-geo-alt me-2"></i>Where do you go?</label>
                     </div>
-                    <div class="input-group mb-2">
+                    <div id="datePicker" class="input-group mb-2">
                         <div class="form-floating">
-                            <input type="date" class="form-control" placeholder="Check-in" name="check_in_date" value="{{ request()->get('check_in_date') }}">
+                            <input type="text" class="form-control" placeholder="Check-in" name="check_in_date" value="{{ request()->get('check_in_date') }}">
                             <label class="text-muted" for="check_in_date"><i class="bi bi-box-arrow-in-down-right me-2"></i>Check-in</label>
                         </div>
                         <div class="form-floating">
-                            <input type="date" class="form-control" placeholder="Check-out" name="check_out_date" value="{{ request()->get('check_out_date') }}">
+                            <input type="text" class="form-control" placeholder="Check-out" name="check_out_date" value="{{ request()->get('check_out_date') }}">
                             <label class="text-muted" for="check_out_date"><i class="bi bi-box-arrow-up-right me-2"></i>Check-out</label>
                         </div>
                     </div>
@@ -44,9 +44,6 @@
                         <input type="text" class="form-control" placeholder="Guests" name="guests" value="{{ request()->get('guests') }}">
                         <label class="text-muted" for="guests"><i class="bi bi-people me-2"></i>How many guests?</label>
                     </div>
-                    <button type="submit" class="btn btn-dark fw-light mb-1 w-100"><i class="bi bi-search me-2"></i>Search</button>
-                </form>
-                <form action="{{ route('property.list') }}">
                     <h6 class="my-2">Price range</h6>
                     <div class="input-group mb-2">
                         <input type="text" class="form-control" name="min_price" value="{{ request()->get('min_price') }}">
@@ -73,7 +70,7 @@
                                    @if(in_array($facility->id, request()->get('facilities', []))) checked @endif> {{ $facility->name }}
                         </div>
                     @endforeach
-                    <button type="submit" class="btn btn-dark fw-light my-2 w-100">Apply</button>
+                    <button type="submit" class="btn btn-dark fw-light mb-1 w-100"><i class="bi bi-search me-2"></i>Search</button>
                 </form>
             </div>
         </div>

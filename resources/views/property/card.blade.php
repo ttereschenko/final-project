@@ -33,7 +33,7 @@
                     @can('addToWishlist', $property)
                         <form action="{{ route('wishlist.add', ['property' => $property->id]) }}" method="post">
                             @csrf
-                            <button class="btn  p-0"><i class="bi bi-heart"></i></button>
+                            <button class="btn p-0"><i class="bi bi-heart"></i></button>
                         </form>
                     @endcan
                     @endnotFavourite

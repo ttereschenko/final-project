@@ -18,13 +18,13 @@
                         <div class="invalid-feedback">{{ $message }}</div>
                         @enderror
                     </div>
-                    <div class="input-group w-25 m-2">
+                    <div id="datePicker" class="input-group w-25 m-2">
                         <div class="form-floating">
-                            <input type="date" class="form-control" name="check_in_date">
+                            <input type="text" class="form-control" placeholder="Check-in" name="check_in_date">
                             <label class="text-muted" for="check_in_date"><i class="bi bi-box-arrow-in-down-right me-2"></i>Check-in</label>
                         </div>
                         <div class="form-floating">
-                            <input type="date" class="form-control" placeholder="Check-out" name="check_out_date">
+                            <input type="text" class="form-control" placeholder="Check-out" name="check_out_date">
                             <label class="text-muted" for="check_out_date"><i class="bi bi-box-arrow-up-right me-2"></i>Check-out</label>
                         </div>
                     </div>

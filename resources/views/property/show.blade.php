@@ -63,15 +63,16 @@
                     @endforeach
                     @endif
                 </div>
+                <small class="text-muted pt-2">{{ $property->created_at?->format('d M Y') }}</small>
             </div>
             @can('reserve', $property)
             <div class="col-4 card">
                 <p>${{ $property->price }} night</p>
                 <form action="{{ route('booking.create', ['property' => $property->id]) }}" method="post">
                     @csrf
-                    <div class="input-group my-2">
+                    <div id="datePicker" class="input-group my-2">
                         <div class="form-floating">
-                            <input type="date" class="form-control @error('check_in_date') is-invalid @enderror"
+                            <input type="text" class="form-control @error('check_in_date') is-invalid @enderror"
                                    placeholder="Check-in" name="check_in_date">
                             <label class="text-muted" for="check_in_date"><i class="bi bi-box-arrow-in-down-right me-2"></i>Check-in</label>
                             @error('check_in_date')
@@ -79,7 +80,7 @@
                             @enderror
                         </div>
                         <div class="form-floating">
-                            <input type="date" class="form-control @error('check_out_date') is-invalid @enderror"
+                            <input type="text" class="form-control @error('check_out_date') is-invalid @enderror"
                                    placeholder="Check-out" name="check_out_date">
                             <label class="text-muted" for="check_out_date"><i class="bi bi-box-arrow-up-right me-2"></i>Check-out</label>
                             @error('check_out_date')

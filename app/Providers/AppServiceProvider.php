@@ -42,19 +42,19 @@ class AppServiceProvider extends ServiceProvider
         });
 
         Blade::if('favourite', function ($property) {
-            $user = auth()->user();
+            $user = auth()?->user()?->id;
             $favourite = Favourite::query()
                 ->where('property_id', '=', $property->id)
-                ->where('user_id', '=', $user->id);
+                ->where('user_id', '=', $user);
 
             return $favourite->exists();
         });
 
         Blade::if('notFavourite', function ($property) {
-            $user = auth()->user();
+            $user = auth()?->user()?->id;
             $favourite = Favourite::query()
                 ->where('property_id', '=', $property->id)
-                ->where('user_id', '=', $user->id);
+                ->where('user_id', '=', $user);
 
             return !$favourite->exists();
         });

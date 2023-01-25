@@ -11,13 +11,16 @@ use App\Models\Type;
 use App\Models\User;
 use App\Services\ImageService;
 use App\Services\PropertyService;
+use App\Services\SearchService;
+use Carbon\Carbon;
 use Illuminate\Http\Request;
 
 class PropertyController extends Controller
 {
     public function __construct(
         private ImageService $imageService,
-        private PropertyService $propertyService
+        private PropertyService $propertyService,
+        private SearchService $searchService,
     ) {
     }
 
@@ -59,56 +62,31 @@ class PropertyController extends Controller
         $query = Property::query()->with(['user', 'type'])->latest();
 
         if ($request->has('location')) {
-            $search = '%' . $request->get('location') . '%';
-            $query->where(function ($q) use ($search) {
-                $q->where('country', 'like', $search)
-                    ->orwhere('city', 'like', $search);
-            });
+            $this->searchService->searchByLocation($query, $request);
         }
 
         if ($request->has('check_in_date') || $request->has('check_out_date')) {
-            $checkIn = $request->get('check_in_date');
-            $checkOut = $request->get('check_out_date');
-
-            $query->whereDoesntHave('bookings', function ($q) use ($checkIn, $checkOut) {
-                $q->whereBetween('check_in_date', [$checkIn, $checkOut])
-                    ->whereBetween('check_out_date', [$checkIn, $checkOut])
-                    ->where('status', '=', 'confirmed');
-            });
+           $this->searchService->searchByDates($query, $request);
         }
 
         if ($request->has('guests')) {
-            $search = '%' . $request->get('guests') . '%';
-            $query->where(function ($q) use ($search) {
-                $q->where('guests', 'like', $search);
-            });
+            $this->searchService->searchByGuestQuantity($query, $request);
         }
 
         if ($request->has('min_price') || $request->has('max_price')) {
-            $min = $request->get('min_price') ?? $query->min('price');
-            $max = $request->get('max_price') ?? $query->max('price');
-
-            $query->where(function ($q) use ($min, $max) {
-                $q->whereBetween('price', [$min, $max]);
-            });
+            $this->searchService->searchByPriceRange($query, $request);
         }
 
         if ($request->has('types')) {
-            $query->whereHas('type', function ($q) use ($request) {
-                $q->whereIn('types.id', $request->get('types'));
-            });
+            $this->searchService->filterByPropertyTypes($query, $request);
         }
 
         if ($request->has('amenities')) {
-            $query->whereHas('amenities', function ($q) use ($request) {
-                $q->whereIn('amenities.id', $request->get('amenities'));
-            });
+            $this->searchService->filterByAmenities($query, $request);
         }
 
         if ($request->has('facilities')) {
-            $query->whereHas('facilities', function ($q) use ($request) {
-                $q->whereIn('facilities.id', $request->get('facilities'));
-            });
+            $this->searchService->filterByFacilities($query, $request);
         }
 
         $properties = $query->paginate()->appends($request->query());

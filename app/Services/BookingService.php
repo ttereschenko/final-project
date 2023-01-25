@@ -6,13 +6,15 @@ use App\Events\BookingRequest;
 use App\Models\Booking;
 use App\Models\Property;
 use App\Models\User;
+use Carbon\Carbon;
+use Carbon\CarbonPeriod;
 
 class BookingService
 {
     public function create(array $data, Property $property, User $user): ?Booking
     {
-        $checkIn = $data['check_in_date'];
-        $checkOut = $data['check_out_date'];
+        $checkIn = Carbon::parse($data['check_in_date'])->format('Y-m-d');
+        $checkOut =  Carbon::parse($data['check_out_date'])->format('Y-m-d');
 
         $booking = Booking::query()
             ->where('property_id', '=', $property->id)
@@ -49,4 +51,18 @@ class BookingService
             ->where('id', '=', $booking->id)
             ->update(['status' => 'canceled']);
     }
+
+//    public function disabledDates (Property $property)
+//    {
+//        $booking = Booking::query()
+//            ->where('property_id', '=', $property->id)
+//            ->where('status', '=', 'confirmed');
+//
+//        $checkIn =  Carbon::createFromFormat('Y/m/d',$booking->get('check_in_date'));
+//        $checkOut = Carbon::createFromFormat('Y/m/d', $booking->get('check_out_date'));
+//
+//        $disabledDates = CarbonPeriod::create($checkIn, $checkOut);
+//
+//        dd($checkIn);
+//    }
 }

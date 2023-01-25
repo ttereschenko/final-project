@@ -38,6 +38,8 @@ class BookingGuestController extends Controller
             session()->flash('success', 'booking request was created');
         }
 
+//        $disabledDates = $this->bookingService->disabledDates($property);
+
         return redirect()->route('property.show', ['property' => $property]);
     }
 }
