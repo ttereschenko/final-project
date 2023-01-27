@@ -1,22 +1,21 @@
-Hello, {{ $guest }}!
+Hello, {{ $booking->user->name }}!
 <br>
 Good news! Your Booking request was confirmed!
 <br>
 <br>
 Owner:
 <br>
-Name: {{ $property->user->name }}
+Name: {{ $booking->property->user->name }}
 <br>
-Surname: {{ $property->user->surname }}
+Surname: {{ $booking->property->user->surname }}
 <br>
-Email: {{ $property->user->email }}
+Email: {{ $booking->property->user->email }}
 <br>
-Phone: {{ $property->user->phone }}
+Phone: {{ $booking->property->user->phone }}
 <br>
 <br>
-Property:
+Address: {{ $booking->property->country }}, {{ $booking->property->city }}, {{ $booking->property->address }}
+{{ $booking->property->house_number }}
 <br>
-Address: {{ $property->country }}, {{ $property->city }}, {{ $property->address }}, {{ $property->house }},
-<br>
-Details: <a href="{{route('property.show', ['property' => $property->id])}}"></a>
+<a href="{{route('property.show', ['property' => $booking->property->id])}}">Details</a>
 

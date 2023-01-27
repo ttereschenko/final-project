@@ -36,7 +36,7 @@
                         <div>
                             <h6 class="my-2">{{ $booking->property->country }}, {{ $booking->property->city }}</h6>
                             <p class="my-1">{{ $booking->property->type->name}}</p>
-                            <p class="card-text">${{ $booking->property->price }} per night</p>
+                            <p class="card-text">${{ $booking->property->price }} night</p>
                         </div>
                         </a>
                     </div>

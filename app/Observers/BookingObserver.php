@@ -18,7 +18,6 @@ class BookingObserver
     public function updated(Booking $booking): void
     {
         $isStatusChanged = $booking->wasChanged('status');
-//        $isStatusChanged = $booking->status !== $booking->getOriginal('status');
 
         if ($isStatusChanged) {
             if ($booking->status === 'confirmed') {

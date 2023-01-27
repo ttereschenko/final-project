@@ -6,63 +6,55 @@ use App\Events\BookingRequest;
 use App\Models\Booking;
 use App\Models\Property;
 use App\Models\User;
-use Carbon\Carbon;
-use Carbon\CarbonPeriod;
+use DateTime;
 
 class BookingService
 {
     public function create(array $data, Property $property, User $user): ?Booking
     {
-        $checkIn = Carbon::parse($data['check_in_date'])->format('Y-m-d');
-        $checkOut =  Carbon::parse($data['check_out_date'])->format('Y-m-d');
+        $bookedProperty = new Booking($data);
 
-        $booking = Booking::query()
-            ->where('property_id', '=', $property->id)
-            ->whereBetween('check_in_date', [$checkIn, $checkOut])
-            ->whereBetween('check_out_date', [$checkIn, $checkOut])
-            ->where('status', '=', 'confirmed');
+        $bookedProperty->user()->associate($user);
+        $bookedProperty->property()->associate($property);
 
-        if (!$booking->exists()) {
-            $bookedProperty = new Booking($data);
+        $bookedProperty->save();
 
-            $bookedProperty->user()->associate($user);
-            $bookedProperty->property()->associate($property);
+        $event = new BookingRequest($property, $bookedProperty);
+        event($event);
 
-            $bookedProperty->save();
-
-            $event = new BookingRequest($property, $bookedProperty);
-            event($event);
-
-            return $bookedProperty;
-        }
-        return null;
+        return $bookedProperty;
     }
 
     public function confirm(Booking $booking): void
     {
-        Booking::query()
-            ->where('id', '=', $booking->id)
-            ->update(['status' => 'confirmed']);
+        $booking->status = 'confirmed';
+        $booking->save();
     }
 
     public function cancel(Booking $booking): void
     {
-        Booking::query()
-            ->where('id', '=', $booking->id)
-            ->update(['status' => 'canceled']);
+        $booking->status = 'canceled';
+        $booking->save();
     }
 
-//    public function disabledDates (Property $property)
-//    {
-//        $booking = Booking::query()
-//            ->where('property_id', '=', $property->id)
-//            ->where('status', '=', 'confirmed');
-//
-//        $checkIn =  Carbon::createFromFormat('Y/m/d',$booking->get('check_in_date'));
-//        $checkOut = Carbon::createFromFormat('Y/m/d', $booking->get('check_out_date'));
-//
-//        $disabledDates = CarbonPeriod::create($checkIn, $checkOut);
-//
-//        dd($checkIn);
-//    }
+    public function disabledDates(Property $property): array
+    {
+        $bookings = Booking::query()
+            ->where('property_id', '=', $property->id)
+            ->where('status', '=', 'confirmed')
+            ->get();
+
+        $disabled = [];
+
+        foreach ($bookings as $booking) {
+            $start = DateTime::createFromFormat('Y-m-d H:i:s', $booking->check_in_date);
+            $end = DateTime::createFromFormat('Y-m-d H:i:s', $booking->check_out_date);
+
+            while ($start <= $end) {
+                $disabled[] = $start->format('d-m-Y');
+                $start->modify("+1 day");
+            }
+        }
+        return $disabled;
+    }
 }

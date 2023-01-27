@@ -1,15 +1,21 @@
 <div class="col mb-4">
     <div class="card shadow-sm">
 {{--        TODO: IMG-SLIDER--}}
-        <div id="carousel">
-        @foreach($property->images as $image)
-            <img src="{{ asset($image->url) }}" class="d-block card-img-top" alt="apartment-photo" height="175px">
-        @endforeach
-        </div>
+        <section id="image-carousel" class="splide" aria-label="apartment-photo">
+            <div class="splide__track">
+                <ul class="splide__list">
+                    @foreach($property->images as $image)
+                    <li class="splide__slide">
+                        <img src="{{ asset($image->url) }}" class="d-block card-img-top" alt="apartment-photo">
+                    </li>
+                    @endforeach
+                </ul>
+            </div>
+        </section>
         <div class="card-body">
             <h6 class="my-0">{{ $property->country }}, {{ $property->city }}</h6>
-            <p class="my-1">{{ $property->type->name}}</p>
-            <p class="card-text">${{ $property->price }} per night</p>
+            <p class="my-0">{{ $property->type->name}}</p>
+            <p class="card-text mb-2">${{ $property->price }}  night</p>
             <div class="d-flex justify-content-between">
                 <div class="btn-group">
                     <a class="btn btn-sm btn-outline-secondary" href="{{ route('property.show', ['property' => $property->id]) }}">View</a>

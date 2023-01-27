@@ -18,7 +18,7 @@
                         <div class="invalid-feedback">{{ $message }}</div>
                         @enderror
                     </div>
-                    <div id="datePicker" class="input-group w-25 m-2">
+                    <div class="input-group w-25 m-2">
                         <div class="form-floating">
                             <input type="text" class="form-control" placeholder="Check-in" name="check_in_date">
                             <label class="text-muted" for="check_in_date"><i class="bi bi-box-arrow-in-down-right me-2"></i>Check-in</label>
@@ -42,10 +42,11 @@
     <div class="container my-4">
         <h4 class="mt-5 heading text-center">Recent announcements</h4>
         <div class="row row-cols-4 mt-5">
-            @foreach($properties as $property)
-                @include('property.card')
-            @endforeach
-            {{ $properties->links() }}
+
+                        @foreach($properties as $property)
+                            @include('property.card')
+
+                        @endforeach
         </div>
     </div>
 @endsection

@@ -3,6 +3,9 @@
 @section('title', $property->title)
 
 @section('content')
+    <script>
+        window.disabled_dates = {!! json_encode($disabled) !!};
+    </script>
     <div class="container my-4">
         <div class="row d-flex justify-content-between">
             <h3 class="heading col-10">{{ $property->title }}</h3>
@@ -12,7 +15,7 @@
                     <form action="{{ route('wishlist.delete', ['property' => $property->id]) }}" method="post">
                         @csrf
                         <button class="btn btn-sm border-bottom px-2 me-1">
-                            <i class="bi bi-heart-fill wishlistActive me-2"></i>Delete from Wishlist
+                            <i class="bi bi-heart-fill wishlistActive me-2"></i>Saved
                         </button>
                     </form>
                 @endcan
@@ -22,7 +25,7 @@
                     <form action="{{ route('wishlist.add', ['property' => $property->id]) }}" method="post">
                         @csrf
                         <button class="btn btn-sm border-bottom px-2 me-1">
-                            <i class="bi bi-heart me-2"></i>Add to Wishlist
+                            <i class="bi bi-heart me-2"></i>Save
                         </button>
                     </form>
                 @endcan
@@ -67,10 +70,10 @@
             </div>
             @can('reserve', $property)
             <div class="col-4 card">
-                <p>${{ $property->price }} night</p>
+                <p class="mt-3 mb-1">${{ $property->price }} night</p>
                 <form action="{{ route('booking.create', ['property' => $property->id]) }}" method="post">
                     @csrf
-                    <div id="datePicker" class="input-group my-2">
+                    <div class="input-group my-2">
                         <div class="form-floating">
                             <input type="text" class="form-control @error('check_in_date') is-invalid @enderror"
                                    placeholder="Check-in" name="check_in_date">
@@ -96,9 +99,7 @@
                         <div class="invalid-feedback">{{ $message }}</div>
                         @enderror
                     </div>
-                    <div class="">
-                        <button type="submit" class="btn btn-dark fw-light my-2 py-2 w-100">Reserve</button>
-                    </div>
+                    <button type="submit" class="btn btn-dark fw-light my-3 py-2 w-100">Reserve</button>
                 </form>
             </div>
             @endcan

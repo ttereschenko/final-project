@@ -4,7 +4,6 @@ namespace App\Mail\Booking;
 
 use App\Models\Booking;
 use Illuminate\Bus\Queueable;
-use Illuminate\Contracts\Queue\ShouldQueue;
 use Illuminate\Mail\Mailable;
 use Illuminate\Mail\Mailables\Content;
 use Illuminate\Mail\Mailables\Envelope;
@@ -47,18 +46,8 @@ class CanceledRequest extends Mailable
         return new Content(
             view: 'emails.canceled_request',
             with: [
-                'name' => $this->booking->user,
+                'name' => $this->booking->user->name,
             ]
         );
-    }
-
-    /**
-     * Get the attachments for the message.
-     *
-     * @return array
-     */
-    public function attachments()
-    {
-        return [];
     }
 }

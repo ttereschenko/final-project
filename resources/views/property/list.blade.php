@@ -30,7 +30,7 @@
                                placeholder="Where do you want to go?" name="location" value="{{ request()->get('location') }}">
                         <label class="text-muted" for="location"><i class="bi bi-geo-alt me-2"></i>Where do you go?</label>
                     </div>
-                    <div id="datePicker" class="input-group mb-2">
+                    <div class="input-group mb-2">
                         <div class="form-floating">
                             <input type="text" class="form-control" placeholder="Check-in" name="check_in_date" value="{{ request()->get('check_in_date') }}">
                             <label class="text-muted" for="check_in_date"><i class="bi bi-box-arrow-in-down-right me-2"></i>Check-in</label>
@@ -45,10 +45,16 @@
                         <label class="text-muted" for="guests"><i class="bi bi-people me-2"></i>How many guests?</label>
                     </div>
                     <h6 class="my-2">Price range</h6>
-                    <div class="input-group mb-2">
-                        <input type="text" class="form-control" name="min_price" value="{{ request()->get('min_price') }}">
-                        <input type="text" class="form-control" name="max_price" value="{{ request()->get('max_price') }}">
-                    </div>
+{{--                    <div class="input-group">--}}
+{{--                        <div class="range-slider">--}}
+{{--                            <input type="range" class="min-price" name="min_price" value="{{ request()->get('min_price') ?? $properties->min('price') }}"--}}
+{{--                                   min="{{ $properties->min('price') }}" max="{{ $properties->max('price') }}">--}}
+{{--                            <input type="range" class="max-price" name="max_price" value="{{ request()->get('max_price') ?? $properties->max('price') }}"--}}
+{{--                                   min="{{ $properties->min('price') }}" max="{{ $properties->max('price') }}">--}}
+{{--                        </div>--}}
+{{--                        <p id="min-value">$ {{$properties->min('price') }}</p> ---}}
+{{--                        <p id="max-value">$ {{$properties->max('price') }}</p>--}}
+{{--                    </div>--}}
                     <h6 class="my-2">Property Type</h6>
                     @foreach($types as $type)
                         <div class="form-check ps-1">

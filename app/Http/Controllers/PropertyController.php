@@ -9,10 +9,10 @@ use App\Models\Facility;
 use App\Models\Property;
 use App\Models\Type;
 use App\Models\User;
+use App\Services\BookingService;
 use App\Services\ImageService;
 use App\Services\PropertyService;
 use App\Services\SearchService;
-use Carbon\Carbon;
 use Illuminate\Http\Request;
 
 class PropertyController extends Controller
@@ -21,6 +21,7 @@ class PropertyController extends Controller
         private ImageService $imageService,
         private PropertyService $propertyService,
         private SearchService $searchService,
+        private BookingService $bookingService
     ) {
     }
 
@@ -100,7 +101,9 @@ class PropertyController extends Controller
 
     public function show(Property $property)
     {
-        return view('property.show', compact('property'));
+        $disabled = $this->bookingService->disabledDates($property);
+
+        return view('property.show', compact('property', 'disabled'));
     }
 
     public function editForm(Property $property)
