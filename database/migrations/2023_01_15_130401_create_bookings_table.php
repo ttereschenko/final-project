@@ -26,6 +26,7 @@ return new class extends Migration
             $table->foreign('property_id')->references('id')->on('properties')->cascadeOnDelete();
 
             $table->integer('guests')->default(1);
+            $table->decimal('total_price');
 
             $table->timestamps();
         });

@@ -17,8 +17,7 @@ class Property extends Model
         'description',
         'price',
         'currency',
-        'country',
-        'city',
+        'city_id',
         'address',
         'house_number',
         'rooms',
@@ -44,6 +43,16 @@ class Property extends Model
     public function type(): BelongsTo
     {
         return $this->belongsTo(Type::class);
+    }
+
+    public function country(): BelongsTo
+    {
+        return $this->belongsTo(Country::class);
+    }
+
+    public function city(): BelongsTo
+    {
+        return $this->belongsTo(City::class);
     }
 
     public function facilities(): BelongsToMany

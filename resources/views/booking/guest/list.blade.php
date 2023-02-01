@@ -12,16 +12,16 @@
                 <p class="my-2"><a href="{{ route('property.list') }}" class="link-dark">Let's travel!</a></p>
             @endif
             <div class="row row-cols-4 mt-3">
-                    @foreach($bookings as $booking)
-                        <div class="col mb-4">
-                            <p>
-                                Dates: {{$booking->check_in_date?->format('d M')}} - {{$booking->check_out_date?->format('d M Y')}}
-                            </p>
-                            <p>Status: {{$booking->status}}</p>
-                            @include('property.card', $property = $booking->property)
-                        </div>
-                    @endforeach
-                </div>
+                @foreach($bookings as $booking)
+                    <div class="col mb-4">
+                        <p class="m-0">
+                            Dates: {{$booking->check_in_date?->format('d M')}} - {{$booking->check_out_date?->format('d M Y')}}
+                        </p>
+                        <p class="mt-0 mb-2">Status: {{$booking->status}}</p>
+                        @include('property.card', $property = $booking->property)
+                    </div>
+                @endforeach
+            </div>
         </div>
     </div>
 @endsection

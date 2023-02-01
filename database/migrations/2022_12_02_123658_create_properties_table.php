@@ -17,8 +17,6 @@ return new class extends Migration
             $table->id();
             $table->string('title');
             $table->longText('description');
-            $table->string('country');
-            $table->string('city');
             $table->string('address');
             $table->integer('house_number');
             $table->decimal('price')->default(0);

@@ -14,7 +14,7 @@
                                placeholder="Name" value="{{ old('name') }}">
                         <label class="text-muted" for="name">Name</label>
                         @error('name')
-                        <div class="invalid-feedback">{{ $message }}</div>
+                            <div class="invalid-feedback">{{ $message }}</div>
                         @enderror
                     </div>
                     <button class="text-white bg-dark heading py-2 my-3 w-100">Create</button>

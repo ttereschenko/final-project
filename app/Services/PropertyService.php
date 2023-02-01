@@ -5,8 +5,6 @@ namespace App\Services;
 use App\Models\Property;
 use App\Models\User;
 
-//use Illuminate\Support\Facades\Storage;
-
 class PropertyService
 {
     public function create(array $data, User $user): Property
@@ -15,6 +13,8 @@ class PropertyService
 
         $property->user()->associate($user);
         $property->type()->associate($data['types']);
+        $property->country()->associate($data['country']);
+        $property->city()->associate($data['city']);
 
         $property->save();
 
@@ -33,6 +33,8 @@ class PropertyService
         $property->fill($data);
 
         $property->type()->associate($data['types']);
+        $property->country()->associate($data['country']);
+        $property->city()->associate($data['city']);
 
         if (isset($data['amenities'])) {
             $property->amenities()->sync($data['amenities']);
@@ -47,6 +49,7 @@ class PropertyService
     public function delete(Property $property): void
     {
         $property->delete();
-//        Storage::deleteDirectory('/images/resource/' . $property->id);
     }
+
+
 }

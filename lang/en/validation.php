@@ -192,6 +192,8 @@ return [
         'types' => 'Property Types',
         'features' => 'Features',
         'beds' => 'Beds',
+        'country' => 'Country',
+        'city' => 'City',
         'phone' => 'Phone',
         'address' => 'Street',
         'house_number' => 'House Number'

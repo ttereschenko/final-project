@@ -26,7 +26,7 @@ class RegisterController extends Controller
         $data = $request->validated();
         $this->userService->register($data);
 
-        session()->flash('success', 'Successfully Sign Up! Don\'t forget verify your email!');
+        session()->flash('success', 'Successfully Sign Up! Don\'t forget to verify your email!');
 
         return redirect()->route('main');
     }

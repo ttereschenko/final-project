@@ -16,12 +16,12 @@ class BookingOwnerController extends Controller
     {
         $user = auth()->user();
 
-        $bookings = Property::query()
+        $properties = Property::query()
             ->where('user_id', '=', $user->id)
             ->whereHas('bookings')
             ->latest()->paginate();
 
-        return view('booking.owner.list', compact('bookings'));
+        return view('booking.owner.list', compact('properties'));
     }
 
     public function show(Booking $booking)

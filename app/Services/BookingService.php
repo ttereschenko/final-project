@@ -16,6 +16,7 @@ class BookingService
 
         $bookedProperty->user()->associate($user);
         $bookedProperty->property()->associate($property);
+        $bookedProperty->total_price = $this->calculateTotalPrice($data, $property);
 
         $bookedProperty->save();
 
@@ -56,5 +57,22 @@ class BookingService
             }
         }
         return $disabled;
+    }
+
+    public function calculateTotalPrice(array $data, Property $property)
+    {
+        $start = DateTime::createFromFormat('d M Y', $data['check_in_date']);
+        $end = DateTime::createFromFormat('d M Y', $data['check_out_date']);
+
+        $nights = [];
+
+        while ($start < $end) {
+            $nights[] = $start->format('d-m-Y');
+            $start->modify("+1 day");
+        }
+
+        $total = count($nights) * $property->price;
+
+        return round($total, 2);
     }
 }

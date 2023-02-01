@@ -14,7 +14,7 @@ Email: {{ $booking->property->user->email }}
 Phone: {{ $booking->property->user->phone }}
 <br>
 <br>
-Address: {{ $booking->property->country }}, {{ $booking->property->city }}, {{ $booking->property->address }}
+Address: {{ $booking->property->country->name }}, {{ $booking->property->city->name }}, {{ $booking->property->address }}
 {{ $booking->property->house_number }}
 <br>
 <a href="{{route('property.show', ['property' => $booking->property->id])}}">Details</a>

@@ -36,6 +36,7 @@ Route::controller(PropertyController::class)->group(function () {
 
        Route::get('/create', 'createForm')->name('create.form')->middleware('auth');
        Route::post('/create', 'create')->name('create')->middleware('auth');
+       Route::post('/create/fetch-cities', 'fetchCity');
 
        Route::get('', 'list')->name('list');
 
@@ -46,6 +47,7 @@ Route::controller(PropertyController::class)->group(function () {
                ->middleware( 'can:edit,property');
            Route::post('/edit', 'edit')->name('edit')
                ->middleware('can:edit,property');
+           Route::post('/edit/fetch-cities', 'fetchCity');
 
            Route::post('/delete', 'delete')->name('delete')
                ->middleware('auth','can:delete,property');

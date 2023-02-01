@@ -2,8 +2,7 @@
 
 namespace App\Services;
 
-
-
+use App\Models\City;
 use Carbon\Carbon;
 
 class SearchService
@@ -11,10 +10,14 @@ class SearchService
     public function searchByLocation($query, $request): void
     {
         $search = '%' . $request->get('location') . '%';
-        $query->where(function ($q) use ($search) {
-            $q->where('country', 'like', $search)
-                ->orwhere('city', 'like', $search);
+
+        $query->whereHas('country', function ($q) use ($search) {
+            $q->where('countries.name', 'like', $search);
         });
+
+//        $query->whereHas('city', function ($q) use ($search) {
+//            $q->where('cities.name', 'like', $search);
+//        });
     }
 
     public function searchByDates($query, $request): void
@@ -37,10 +40,10 @@ class SearchService
         });
     }
 
-    public function searchByPriceRange($query, $request): void
+    public function searchByPrice($query, $request): void
     {
-        $min = $request->get('min_price') ?? $query->min('price');
-        $max = $request->get('max_price') ?? $query->max('price');
+        $min = $request->get('min_price');
+        $max = $request->get('max_price');
 
         $query->where(function ($q) use ($min, $max) {
             $q->whereBetween('price', [$min, $max]);
