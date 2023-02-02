@@ -36,9 +36,11 @@
                             <div class="col-6">
                                 <select name="country" class="form-select @error('country') is-invalid @enderror py-3"
                                         id="country-edit-dropdown">
-                                    <option selected disabled class="">Select Country</option>
                                     @foreach($countries as $country)
-                                        <option value="{{ $country->id }}">{{ $country->name }}</option>
+                                        <option value="{{ $country->id }}"
+                                                @if($property->country->id == $country->id) selected @endif>
+                                            {{ $country->name }}
+                                        </option>
                                     @endforeach
                                 </select>
                                 @error('country')
@@ -48,7 +50,11 @@
                             <div class="col-6 ps-0">
                                 <select name="city" class="form-select @error('city') is-invalid @enderror py-3"
                                         id="city-edit-dropdown">
-                                    <option selected disabled class="">Select City</option>
+                                    @foreach($cities as $city)
+                                        <option @if(($property->city->id) == $city->id) selected @endif>
+                                            {{ $city->name }}
+                                        </option>
+                                    @endforeach
                                 </select>
                                 @error('city')
                                     <div class="invalid-feedback">{{ $message }}</div>
@@ -76,24 +82,13 @@
                         <h5 class="mt-3">Characteristics</h5>
                         <div class="row my-2">
                             <div class="form-group col-6">
-                                <div class="form-control @error('types') is-invalid @enderror py-3">
-                                    <a class="link-secondary text-decoration-none btn-toggle dropdown-toggle"
-                                       data-bs-toggle="collapse" data-bs-target="#types-collapse">
-                                        Choose a Property Type
-                                    </a>
-                                    <div class="collapse" id="types-collapse">
-                                        <ul class="btn-toggle-nav list-unstyled m-1">
-                                            @foreach($types as $type)
-                                                <li>
-                                                    <input type="radio" name="types" value="{{ $type->id }}"
-                                                           class="form-check-input m-1 @error('types') is-invalid @enderror "
-                                                           @if($property->type_id) checked @endif>
-                                                    {{ $type->name }}
-                                                </li>
-                                            @endforeach
-                                        </ul>
-                                    </div>
-                                </div>
+                                <select name="types" class="form-select @error('types') is-invalid @enderror py-3">
+                                    @foreach($types as $type)
+                                        <option @if($property->type->id == $type->id) selected @endif value="{{ $type->id }}">
+                                            {{ $type->name}}
+                                        </option>
+                                    @endforeach
+                                </select>
                                 @error('types')
                                     <div class="invalid-feedback">{{ $message }}</div>
                                 @enderror
@@ -209,10 +204,8 @@
                                 <div class="invalid-feedback">{{ $message }}</div>
                             @enderror
                         </div>
-                        <div class="d-flex justify-content-end">
-                            <button class="btn btn-dark heading py-2 w-50 my-4">Edit</button>
-                            <button type="reset" class="btn btn-outline-dark fw-light w-50">Reset</button>
-                        </div>
+                        <button class="btn btn-dark py-2 px-5 my-4 fw-light">Edit</button>
+                        <button type="reset" class="btn btn-outline-dark fw-light py-2 px-5">Reset</button>
                     </div>
                 </div>
             </form>

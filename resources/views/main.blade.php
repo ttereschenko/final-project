@@ -10,7 +10,7 @@
             </div>
             <div class="row my-4">
                 <form action="{{ route('property.list') }}" class="d-flex justify-content-center mb-5">
-                    <div class="form-floating m-2 col-3">
+                    <div class="form-floating m-2 col-lg-3">
                         <input type="text" class="form-control"
                                placeholder="Where do you want to go?" name="location">
                         <label class="text-muted" for="location">
@@ -31,7 +31,7 @@
                             </label>
                         </div>
                     </div>
-                    <div class="form-floating m-2 col-2">
+                    <div class="form-floating m-2 col-lg-2">
                         <input type="text" class="form-control" placeholder="Guests" name="guests">
                         <label class="text-muted" for="guests"><i class="bi bi-people me-2"></i>Guests</label>
                     </div>
@@ -46,7 +46,7 @@
     </div>
     <div class="container my-4">
         <h4 class="mt-5 heading text-center">Recent announcements</h4>
-        <div class="row row-cols-4 mt-5">
+        <div class="row row-cols-lg-4 mt-5">
             @foreach($properties as $property)
                 @include('property.card')
             @endforeach

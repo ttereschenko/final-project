@@ -69,7 +69,7 @@
                             <div class="invalid-feedback">{{ $message }}</div>
                         @enderror
                     </div>
-                    <button type="submit" class="text-white bg-dark w-100 heading py-2">Create</button>
+                    <button type="submit" class="btn btn-dark w-100 heading py-2">Create</button>
                     <p class="my-3">
                         <a class="link-dark" href="{{ route('login.form') }}">Already have an account?</a>
                     </p>

@@ -27,11 +27,9 @@ class FavouriteController extends Controller
     {
         $user = auth()->user();
 
-        $favoriteProperty = $this->favouriteService->add($property, $user);
+        $this->favouriteService->add($property, $user);
 
-        if ($favoriteProperty) {
-            session()->flash('success', 'Added to Wishlist');
-        }
+        session()->flash('success', 'Added to Wishlist');
 
         return redirect()->back();
     }
@@ -42,7 +40,7 @@ class FavouriteController extends Controller
 
         $this->favouriteService->delete($property, $user);
 
-        session()->flash('success', 'Deleted from Wishlist');
+        session()->flash('error', 'Deleted from Wishlist');
 
         return redirect()->back();
     }

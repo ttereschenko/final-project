@@ -50,6 +50,4 @@ class PropertyService
     {
         $property->delete();
     }
-
-
 }

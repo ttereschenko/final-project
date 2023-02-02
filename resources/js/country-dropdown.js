@@ -42,7 +42,7 @@ $(document).ready(function () {
             },
             dataType: 'json',
             success: function (result) {
-                $('#city-edit-dropdown').html(`<option selected disabled class="">Select City</option>`);
+                $('#city-edit-dropdown').html(`<option selected disabled>Select other City</option>`);
                 $.each(result.city, function (key, value) {
                     $("#city-edit-dropdown").append('<option value="' + value
                         .id + '">' + value.name + '</option>');

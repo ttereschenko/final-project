@@ -23,9 +23,12 @@
                             <div class="col-6">
                                 <select name="country" class="form-select @error('country') is-invalid @enderror py-3"
                                         id="country-dropdown">
-                                    <option selected disabled class="">Select Country</option>
+                                    <option selected>Select Country</option>
                                     @foreach($countries as $country)
-                                        <option value="{{ $country->id }}">{{ $country->name }}</option>
+                                        <option value="{{ $country->id }}"
+                                                @if((old('country', $country->id) == $country->id)) selected @endif>
+                                            {{ $country->name }}
+                                        </option>
                                     @endforeach
                                 </select>
                                 @error('country')
@@ -35,7 +38,12 @@
                             <div class="col-6 ps-0">
                                 <select name="city" class="form-select @error('city') is-invalid @enderror py-3"
                                         id="city-dropdown">
-                                    <option selected disabled class="">Select City</option>
+                                    <option selected>Select City</option>
+                                    @foreach($cities as $city)
+                                        <option @if((old('city', $city->id) == $city->id)) selected @endif>
+                                            {{ $city->name }}
+                                        </option>
+                                    @endforeach
                                 </select>
                                 @error('city')
                                     <div class="invalid-feedback">{{ $message }}</div>
@@ -62,24 +70,16 @@
                         </div>
                         <h5 class="mt-3">Characteristics</h5>
                         <div class="row my-2">
-                            <div class="form-group col-6">
-                                <div class="form-control @error('types') is-invalid @enderror py-3">
-                                    <a class="link-secondary text-decoration-none btn-toggle dropdown-toggle"
-                                       data-bs-toggle="collapse" data-bs-target="#types-collapse">
-                                        Choose a Property Type
-                                    </a>
-                                    <div class="collapse" id="types-collapse">
-                                        <ul class="btn-toggle-nav list-unstyled m-1">
-                                            @foreach($types as $type)
-                                                <li>
-                                                    <input type="radio" name="types" value="{{ $type->id }}"
-                                                           class="form-check-input m-1 @error('types') is-invalid @enderror ">
-                                                    {{ $type->name }}
-                                                </li>
-                                            @endforeach
-                                        </ul>
-                                    </div>
-                                </div>
+                            <div class="col-6">
+                                <select name="types" class="form-select @error('types') is-invalid @enderror py-3">
+                                    <option selected disabled>Select a Property Type</option>
+                                    @foreach($types as $type)
+                                        <option value="{{ $type->id }}"
+                                                @if((old('types', $type->id) == $type->id)) selected @endif>
+                                            {{ $type->name }}
+                                        </option>
+                                    @endforeach
+                                </select>
                                 @error('types')
                                     <div class="invalid-feedback">{{ $message }}</div>
                                 @enderror
@@ -193,10 +193,9 @@
                                 <div class="invalid-feedback">{{ $message }}</div>
                             @enderror
                         </div>
+                        <button class="btn btn-dark py-2 my-4 fw-light px-5">Create</button>
                     </div>
                 </div>
-                <button class="text-white bg-dark heading py-2 w-25 my-4">Create</button>
-                <button type="reset" class="btn btn-outline-dark fw-light w-25">Reset</button>
             </form>
     </div>
 @endsection

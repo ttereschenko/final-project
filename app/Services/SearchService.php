@@ -22,12 +22,12 @@ class SearchService
 
     public function searchByDates($query, $request): void
     {
-        $checkIn = Carbon::parse($request->get('check_in_date'))->format('Y-m-d');
-        $checkOut = Carbon::parse($request->get('check_out_date'))->format('Y-m-d');
-
-        $query->whereDoesntHave('bookings', function ($q) use ($checkIn, $checkOut) {
-            $q->whereBetween('check_in_date', [$checkIn, $checkOut])
-                ->whereBetween('check_out_date', [$checkIn, $checkOut])
+        $start = Carbon::parse($request->get('check_in_date'))->format('Y-m-d');
+        $end = Carbon::parse($request->get('check_out_date'))->format('Y-m-d');
+// ???
+        $query->whereDoesntHave('bookings', function ($q) use ($start, $end) {
+            $q->whereBetween('check_in_date', [$start, $end])
+                ->whereBetween('check_out_date', [$start, $end])
                 ->where('status', '=', 'confirmed');
         });
     }

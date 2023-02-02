@@ -8,8 +8,10 @@
             <div class="col-9 pe-4">
                 <div class="d-flex justify-content-between mb-4 mt-1">
                     <h3 class="my-1 heading">All Announcements</h3>
+                    @owner
                     <a href="{{ route('property.create') }}" class="btn btn-dark fw-light py-2">
                         <i class="bi bi-plus-square me-3"></i>Add new</a>
+                    @endowner
                 </div>
                 @if($properties->isEmpty())
                     <p>Any announcement wasn't found</p>
@@ -58,16 +60,14 @@
                     <div class="input-group">
                         <div class="range-slider my-2">
                             <input type="range" id="min-price" name="min_price"
-                                   value="{{ request()->get('min_price') ?? $properties->min('price') }}"
-                                   min="{{ $properties->min('price') }}" max="{{ $properties->max('price') }}">
+                                   value="{{ request()->get('min_price') ?? 0 }}" min="0" max="500">
                             <input type="range" id="max-price" name="max_price"
-                                   value="{{ request()->get('max_price') ?? $properties->max('price') }}"
-                                   min="{{ $properties->min('price') }}" max="{{ $properties->max('price') }}">
+                                   value="{{ request()->get('max_price') ?? 500 }}" min="0" max="500">
                         </div>
                         <div class="mt-4">
-                            <span id="min-value">$ {{ request()->get('min_price') ?? $properties->min('price') }}</span>
+                            <span id="min-value">$ {{ request()->get('min_price') ?? 0 }}</span>
                             -
-                            <span id="max-value">$ {{ request()->get('max_price') ?? $properties->max('price') }}</span>
+                            <span id="max-value">$ {{ request()->get('max_price') ?? 500 }}</span>
                         </div>
                     </div>
                     <h6 class="my-2">Property Type</h6>
@@ -97,6 +97,7 @@
                     <button type="submit" class="btn btn-dark fw-light mb-1 w-100 my-3">
                         <i class="bi bi-search me-2"></i>Search
                     </button>
+                    <a class="link-dark" href="{{ route('property.list') }}">Clear Filters</a>
                 </form>
             </div>
         </div>

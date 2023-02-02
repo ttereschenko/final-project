@@ -51,7 +51,7 @@ class BookingService
             $start = DateTime::createFromFormat('Y-m-d H:i:s', $booking->check_in_date);
             $end = DateTime::createFromFormat('Y-m-d H:i:s', $booking->check_out_date);
 
-            while ($start <= $end) {
+            while ($start < $end) {
                 $disabled[] = $start->format('d-m-Y');
                 $start->modify("+1 day");
             }

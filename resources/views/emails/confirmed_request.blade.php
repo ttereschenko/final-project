@@ -17,5 +17,7 @@ Phone: {{ $booking->property->user->phone }}
 Address: {{ $booking->property->country->name }}, {{ $booking->property->city->name }}, {{ $booking->property->address }}
 {{ $booking->property->house_number }}
 <br>
+Total Price: ${{ $booking->total_price }}
+<br>
 <a href="{{route('property.show', ['property' => $booking->property->id])}}">Details</a>
 

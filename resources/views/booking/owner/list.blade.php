@@ -15,14 +15,14 @@
                 @foreach($properties as $property)
                     @foreach($property->bookings as $booking)
                     <div class="col m-4 py-3 px-4 card shadow">
-                        <p class="m-1">Guest: {{$booking->user->name}} {{$booking->user->surname}}</p>
-                        <p class="m-1">Contacts: {{$booking->user->phone}}, {{$booking->user->email}}</p>
+                        <p class="m-1">Guest: {{ $booking->user->name }} {{ $booking->user->surname }}</p>
+                        <p class="m-1">Contacts: {{ $booking->user->phone }}, {{ $booking->user->email }}</p>
                         <p class="m-1">
-                            Dates: {{$booking->check_in_date?->format('d M')}} - {{$booking->check_out_date?->format('d M Y')}}
+                            Dates: {{ $booking->check_in_date?->format('d M') }} - {{ $booking->check_out_date?->format('d M Y')}}
                         </p>
-                        <p class="m-1">Costs: ${{$booking->total_price}}</p>
-                        <p class="mx-1 mb-2">Status: {{$booking->status}}</p>
-                        <a class="m-1" href="{{route('property.show', ['property' => $booking->property->id])}}">Announcement</a>
+                        <p class="m-1">Costs: ${{ $booking->total_price }}</p>
+                        <p class="mx-1 mb-2">Status: {{ $booking->status }}</p>
+                        <a class="m-1" href="{{route('property.show', ['property' => $booking->property->id]) }}">Announcement</a>
                     </div>
                     @endforeach
                 @endforeach

@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Http\Requests\Property\CreateRequest;
 use App\Http\Requests\Property\EditRequest;
 use App\Models\Amenity;
+use App\Models\Booking;
 use App\Models\City;
 use App\Models\Country;
 use App\Models\Facility;
@@ -30,11 +31,15 @@ class PropertyController extends Controller
     public function createForm()
     {
         $countries = Country::all();
+        $cities = City::all();
         $amenities = Amenity::all();
         $types = Type::all();
         $facilities = Facility::all();
 
-        return view('property.create', compact('amenities', 'types', 'facilities', 'countries'));
+        return view(
+            'property.create',
+            compact('amenities', 'types', 'facilities', 'countries', 'cities')
+        );
     }
 
     public function create(CreateRequest $request)
@@ -48,12 +53,6 @@ class PropertyController extends Controller
 
         if ($request->hasFile('images')) {
             $this->imageService->create($files, $property);
-        }
-
-        if ($user->role !== 'owner') {
-            User::query()
-                ->where('id', '=', $user->id)
-                ->update(['role' => 'owner']);
         }
 
         session()->flash('success', 'Item was successfully added');
@@ -70,7 +69,7 @@ class PropertyController extends Controller
         }
 
         if ($request->has('check_in_date') || $request->has('check_out_date')) {
-           $this->searchService->searchByDates($query, $request);
+            $this->searchService->searchByDates($query, $request);
         }
 
         if ($request->has('guests')) {
@@ -95,30 +94,32 @@ class PropertyController extends Controller
 
         $properties = $query->paginate()->appends($request->query());
 
-        $cities = City::all();
         $amenities = Amenity::all();
         $types = Type::all();
         $facilities = Facility::all();
 
-        return view('property.list', compact('properties', 'amenities', 'types', 'facilities', 'cities'));
+        return view('property.list', compact('properties', 'amenities', 'types', 'facilities'));
     }
 
     public function show(Property $property)
     {
         $disabled = $this->bookingService->disabledDates($property);
-        $city = City::query()->where('id', '=', $property->city_id)->value('name');
 
-        return view('property.show', compact('property', 'disabled', 'city'));
+        return view('property.show', compact('property', 'disabled'));
     }
 
     public function editForm(Property $property)
     {
         $countries = Country::all();
+        $cities = City::all();
         $amenities = Amenity::all();
         $types = Type::all();
         $facilities = Facility::all();
 
-        return view('property.edit', compact('property', 'amenities', 'types', 'facilities', 'countries'));
+        return view(
+            'property.edit',
+            compact('property', 'amenities', 'types', 'facilities', 'countries', 'cities')
+        );
     }
 
     public function edit(Property $property, EditRequest $request)

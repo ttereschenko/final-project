@@ -8,6 +8,17 @@
     font-weight: 500;
 }
 
+.form-select,
+.form-control {
+    font-weight: lighter;
+}
+
+.form-control:focus,
+.form-select:focus,
+.input-group:focus {
+    font-weight: lighter;
+}
+
 .main-form {
     background-image: linear-gradient(rgba(80, 80, 80, 0.3), rgba(80, 80, 80, 0.3)), url("/resources/images/main_img.jpg");
     background-size: cover;
