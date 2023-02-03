@@ -44,7 +44,7 @@
             </div>
         </div>
     </div>
-    <div class="container my-4">
+    <div class="container my-4 justify-content-center">
         <h4 class="mt-5 heading text-center">Recent announcements</h4>
         <div class="row row-cols-lg-4 mt-5">
             @foreach($properties as $property)

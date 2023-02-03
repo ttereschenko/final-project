@@ -6,6 +6,7 @@ use App\Http\Controllers\Controller;
 use App\Http\Resources\FavouriteResource;
 use App\Models\Property;
 use App\Services\FavouriteService;
+use Illuminate\Http\Response;
 
 class FavouriteController extends Controller
 {
@@ -22,7 +23,7 @@ class FavouriteController extends Controller
         return new FavouriteResource($favoriteProperty);
     }
 
-    public function delete(Property $property)
+    public function delete(Property $property): Response
     {
         $user = auth()->user();
 

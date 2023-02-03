@@ -22,10 +22,10 @@ class SendLoginAlert
     /**
      * Handle the event.
      *
-     * @param  \App\Events\UserLoggedIn  $event
+     * @param  UserLoggedIn  $event
      * @return void
      */
-    public function handle(UserLoggedIn $event)
+    public function handle(UserLoggedIn $event): void
     {
         Mail::to($event->user->email)->send(new LoginAlert($event->user, $event->ipAddress));
     }

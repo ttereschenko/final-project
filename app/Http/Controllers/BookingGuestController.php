@@ -2,14 +2,12 @@
 
 namespace App\Http\Controllers;
 
-use App\Events\BookingRequest;
 use App\Http\Requests\Booking\CreateRequest;
-use App\Models\Amenity;
 use App\Models\Booking;
-use App\Models\Facility;
 use App\Models\Property;
-use App\Models\Type;
 use App\Services\BookingService;
+use Illuminate\Contracts\View\View;
+use Illuminate\Http\RedirectResponse;
 
 class BookingGuestController extends Controller
 {
@@ -17,7 +15,7 @@ class BookingGuestController extends Controller
     {
     }
 
-    public function list()
+    public function list(): View
     {
         $user = auth()->user();
 
@@ -28,7 +26,7 @@ class BookingGuestController extends Controller
         return view('booking.guest.list', compact('bookings'));
     }
 
-    public function createRequest(Property $property, CreateRequest $request)
+    public function createRequest(Property $property, CreateRequest $request): RedirectResponse
     {
         $data = $request->validated();
         $user = auth()->user();

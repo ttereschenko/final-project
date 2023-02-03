@@ -6,6 +6,8 @@ use App\Http\Requests\Facility\CreateRequest;
 use App\Http\Requests\Facility\EditRequest;
 use App\Models\Facility;
 use App\Services\FacilityService;
+use Illuminate\Contracts\View\View;
+use Illuminate\Http\RedirectResponse;
 
 class FacilityController extends Controller
 {
@@ -13,12 +15,12 @@ class FacilityController extends Controller
     {
     }
 
-    public function createForm()
+    public function createForm(): View
     {
         return view('facility.create');
     }
 
-    public function create(CreateRequest $request)
+    public function create(CreateRequest $request): RedirectResponse
     {
         $data = $request->validated();
         $this->facilityService->create($data);
@@ -28,19 +30,19 @@ class FacilityController extends Controller
         return redirect()->route('facility.list');
     }
 
-    public function list()
+    public function list(): View
     {
         $facilities = Facility::query()->paginate();
 
         return view('facility.list', compact('facilities'));
     }
 
-    public function editForm(Facility $facility)
+    public function editForm(Facility $facility): View
     {
         return view('facility.edit', compact('facility'));
     }
 
-    public function edit(Facility $facility, EditRequest $request)
+    public function edit(Facility $facility, EditRequest $request): RedirectResponse
     {
         $data = $request->validated();
         $this->facilityService->edit($facility, $data);
@@ -50,7 +52,7 @@ class FacilityController extends Controller
         return redirect()->route('facility.list');
     }
 
-    public function delete(Facility $facility)
+    public function delete(Facility $facility): RedirectResponse
     {
         $this->facilityService->delete($facility);
 

@@ -5,17 +5,18 @@ namespace App\Http\Controllers;
 use App\Http\Requests\Property\CreateRequest;
 use App\Http\Requests\Property\EditRequest;
 use App\Models\Amenity;
-use App\Models\Booking;
 use App\Models\City;
 use App\Models\Country;
 use App\Models\Facility;
 use App\Models\Property;
 use App\Models\Type;
-use App\Models\User;
 use App\Services\BookingService;
 use App\Services\ImageService;
 use App\Services\PropertyService;
 use App\Services\SearchService;
+use Illuminate\Contracts\View\View;
+use Illuminate\Http\JsonResponse;
+use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
 
 class PropertyController extends Controller
@@ -28,21 +29,17 @@ class PropertyController extends Controller
     ) {
     }
 
-    public function createForm()
+    public function createForm(): View
     {
         $countries = Country::all();
-        $cities = City::all();
         $amenities = Amenity::all();
         $types = Type::all();
         $facilities = Facility::all();
 
-        return view(
-            'property.create',
-            compact('amenities', 'types', 'facilities', 'countries', 'cities')
-        );
+        return view('property.create', compact('amenities', 'types', 'facilities', 'countries'));
     }
 
-    public function create(CreateRequest $request)
+    public function create(CreateRequest $request): RedirectResponse
     {
         $data = $request->validated();
         $user = $request->user();
@@ -60,7 +57,7 @@ class PropertyController extends Controller
         return redirect()->route('property.show', ['property' => $property->id]);
     }
 
-    public function list(Request $request)
+    public function list(Request $request): View
     {
         $query = Property::query()->with(['user', 'type'])->latest();
 
@@ -101,14 +98,14 @@ class PropertyController extends Controller
         return view('property.list', compact('properties', 'amenities', 'types', 'facilities'));
     }
 
-    public function show(Property $property)
+    public function show(Property $property): View
     {
         $disabled = $this->bookingService->disabledDates($property);
 
         return view('property.show', compact('property', 'disabled'));
     }
 
-    public function editForm(Property $property)
+    public function editForm(Property $property): View
     {
         $countries = Country::all();
         $cities = City::all();
@@ -122,7 +119,7 @@ class PropertyController extends Controller
         );
     }
 
-    public function edit(Property $property, EditRequest $request)
+    public function edit(Property $property, EditRequest $request): RedirectResponse
     {
         $data = $request->validated();
         $files = $request->file('images');
@@ -138,7 +135,7 @@ class PropertyController extends Controller
         return redirect()->route('property.show', ['property' => $property->id]);
     }
 
-    public function delete(Property $property)
+    public function delete(Property $property): RedirectResponse
     {
         $this->propertyService->delete($property);
 
@@ -147,7 +144,7 @@ class PropertyController extends Controller
         return redirect()->back();
     }
 
-    public function fetchCity(Request $request)
+    public function fetchCity(Request $request): JsonResponse
     {
         $data['city'] = City::query()
             ->where('country_id', $request->country_id)

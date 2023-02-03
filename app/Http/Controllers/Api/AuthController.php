@@ -21,8 +21,6 @@ class AuthController extends Controller
         $user = $this->userService->login($credentials, 'api', $request);
 
         if ($user) {
-//            session()->flash('success', "You're Signed In!");
-
             return new UserResource($user);
         }
 

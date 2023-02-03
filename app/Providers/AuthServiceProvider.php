@@ -4,10 +4,12 @@ namespace App\Providers;
 
 // use Illuminate\Support\Facades\Gate;
 use App\Models\Amenity;
+use App\Models\Booking;
 use App\Models\Facility;
 use App\Models\Property;
 use App\Models\Type;
 use App\Policies\AmenityPolicy;
+use App\Policies\BookingPolicy;
 use App\Policies\FacilityPolicy;
 use App\Policies\PropertyPolicy;
 use App\Policies\TypePolicy;
@@ -25,6 +27,7 @@ class AuthServiceProvider extends ServiceProvider
         Type::class => TypePolicy::class,
         Amenity::class => AmenityPolicy::class,
         Facility::class => FacilityPolicy::class,
+        Booking::class => BookingPolicy::class,
     ];
 
     /**

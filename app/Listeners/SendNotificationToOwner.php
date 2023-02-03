@@ -23,10 +23,10 @@ class SendNotificationToOwner
     /**
      * Handle the event.
      *
-     * @param  \App\Events\BookingRequest  $event
+     * @param  BookingRequest  $event
      * @return void
      */
-    public function handle(BookingRequest $event)
+    public function handle(BookingRequest $event): void
     {
         Mail::to($event->property->user->email)->send(new OwnerNotification($event->property, $event->booking));
     }

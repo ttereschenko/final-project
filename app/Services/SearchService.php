@@ -2,7 +2,6 @@
 
 namespace App\Services;
 
-use App\Models\City;
 use Carbon\Carbon;
 
 class SearchService
@@ -15,7 +14,7 @@ class SearchService
             $q->where('countries.name', 'like', $search);
         });
 
-//        $query->whereHas('city', function ($q) use ($search) {
+//        $query->orWhereHas('city', function ($q) use ($search) {
 //            $q->where('cities.name', 'like', $search);
 //        });
     }

@@ -59,7 +59,7 @@ class BookingService
         return $disabled;
     }
 
-    public function calculateTotalPrice(array $data, Property $property)
+    public function calculateTotalPrice(array $data, Property $property): float
     {
         $start = DateTime::createFromFormat('d M Y', $data['check_in_date']);
         $end = DateTime::createFromFormat('d M Y', $data['check_out_date']);

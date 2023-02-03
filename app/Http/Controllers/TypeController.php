@@ -6,6 +6,8 @@ use App\Http\Requests\Type\CreateRequest;
 use App\Http\Requests\Type\EditRequest;
 use App\Models\Type;
 use App\Services\TypeService;
+use Illuminate\Contracts\View\View;
+use Illuminate\Http\RedirectResponse;
 
 class TypeController extends Controller
 {
@@ -13,12 +15,12 @@ class TypeController extends Controller
     {
     }
 
-    public function createForm()
+    public function createForm(): View
     {
         return view('type.create');
     }
 
-    public function create(CreateRequest $request)
+    public function create(CreateRequest $request): RedirectResponse
     {
         $data = $request->validated();
         $this->typeService->create($data);
@@ -28,19 +30,19 @@ class TypeController extends Controller
         return redirect()->route('type.list');
     }
 
-    public function list()
+    public function list(): View
     {
         $types = Type::query()->paginate();
 
         return view('type.list', compact('types'));
     }
 
-    public function editForm(Type $type)
+    public function editForm(Type $type): View
     {
         return view('type.edit', compact('type'));
     }
 
-    public function edit(Type $type, EditRequest $request)
+    public function edit(Type $type, EditRequest $request): RedirectResponse
     {
         $data = $request->validated();
         $this->typeService->edit($type, $data);
@@ -50,7 +52,7 @@ class TypeController extends Controller
         return redirect()->route('type.list');
     }
 
-    public function delete(Type $type)
+    public function delete(Type $type): RedirectResponse
     {
         $this->typeService->delete($type);
 

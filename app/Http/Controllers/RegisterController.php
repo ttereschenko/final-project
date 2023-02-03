@@ -3,12 +3,12 @@
 namespace App\Http\Controllers;
 
 use App\Http\Requests\RegisterRequest;
-use App\Mail\EmailConfirmation;
 use App\Models\User;
 use App\Services\UserService;
 use DateTime;
+use Illuminate\Contracts\View\View;
+use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
-use Illuminate\Support\Facades\Mail;
 
 class RegisterController extends Controller
 {
@@ -16,12 +16,12 @@ class RegisterController extends Controller
     {
     }
 
-    public function registerForm()
+    public function registerForm(): View
     {
         return view('register');
     }
 
-    public function register(RegisterRequest $request)
+    public function register(RegisterRequest $request): RedirectResponse
     {
         $data = $request->validated();
         $this->userService->register($data);
@@ -31,7 +31,7 @@ class RegisterController extends Controller
         return redirect()->route('main');
     }
 
-    public function verifyEmail(int $id, string $hash, Request $request)
+    public function verifyEmail(int $id, string $hash, Request $request): RedirectResponse
     {
         if (!$request->hasValidSignature()) {
             abort(403);

@@ -39,7 +39,7 @@
                 </div>
                 <div>
                     @notFavourite($property)
-                    @can('addToWishlist', $property)
+                    @can('addFavourite', $property)
                         <form action="{{ route('wishlist.add', ['property' => $property->id]) }}" method="post">
                             @csrf
                             <button class="btn p-0"><i class="bi bi-heart"></i></button>
@@ -47,7 +47,7 @@
                     @endcan
                     @endnotFavourite
                     @favourite($property)
-                    @can('deleteFromWishlist', $property)
+                    @can('deleteFavourite', $property)
                         <form action="{{ route('wishlist.delete', ['property' => $property->id]) }}" method="post">
                             @csrf
                             <button class="btn p-0"><i class="bi bi-heart-fill wishlistActive"></i></button>

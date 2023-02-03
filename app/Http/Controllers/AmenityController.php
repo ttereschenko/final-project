@@ -6,6 +6,8 @@ use App\Http\Requests\Amenity\CreateRequest;
 use App\Http\Requests\Amenity\EditRequest;
 use App\Models\Amenity;
 use App\Services\AmenityService;
+use Illuminate\Contracts\View\View;
+use Illuminate\Http\RedirectResponse;
 
 class AmenityController extends Controller
 {
@@ -13,12 +15,12 @@ class AmenityController extends Controller
     {
     }
 
-    public function createForm()
+    public function createForm(): View
     {
         return view('amenity.create');
     }
 
-    public function create(CreateRequest $request)
+    public function create(CreateRequest $request): RedirectResponse
     {
         $data = $request->validated();
         $this->amenityService->create($data);
@@ -28,19 +30,19 @@ class AmenityController extends Controller
         return redirect()->route('amenity.list');
     }
 
-    public function list()
+    public function list(): View
     {
         $amenities = Amenity::query()->paginate();
 
         return view('amenity.list', compact('amenities'));
     }
 
-    public function editForm(Amenity $amenity)
+    public function editForm(Amenity $amenity): View
     {
         return view('amenity.edit', compact('amenity'));
     }
 
-    public function edit(Amenity $amenity, EditRequest $request)
+    public function edit(Amenity $amenity, EditRequest $request): RedirectResponse
     {
         $data = $request->validated();
         $this->amenityService->edit($amenity, $data);
@@ -50,7 +52,7 @@ class AmenityController extends Controller
         return redirect()->route('amenity.list');
     }
 
-    public function delete(Amenity $amenity)
+    public function delete(Amenity $amenity): RedirectResponse
     {
         $this->amenityService->delete($amenity);
 

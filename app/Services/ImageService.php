@@ -7,7 +7,7 @@ use App\Models\Property;
 
 class ImageService
 {
-    public function create(array $files, Property $property)
+    public function create(array $files, Property $property): void
     {
         foreach ($files as $file) {
             $image = new Image();
@@ -24,7 +24,5 @@ class ImageService
     public function delete(Image $image): void
     {
         $image->delete();
-
-//        Storage::delete($image->url);
     }
 }

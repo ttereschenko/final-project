@@ -51,7 +51,8 @@
                                 <select name="city" class="form-select @error('city') is-invalid @enderror py-3"
                                         id="city-edit-dropdown">
                                     @foreach($cities as $city)
-                                        <option @if(($property->city->id) == $city->id) selected @endif>
+                                        <option @if(($property->city->id) == $city->id) selected @endif
+                                                value="{{ $city->id }}">
                                             {{ $city->name }}
                                         </option>
                                     @endforeach

@@ -11,7 +11,7 @@
             <h3 class="heading col-10">{{ $property->title }}</h3>
             <div class="col-2 d-flex justify-content-end">
             @favourite($property)
-                @can('deleteFromWishlist', $property)
+                @can('deleteFavourite', $property)
                     <form action="{{ route('wishlist.delete', ['property' => $property->id]) }}" method="post">
                         @csrf
                         <button class="btn btn-sm border-bottom px-2 me-1">
@@ -21,7 +21,7 @@
                 @endcan
             @endfavourite
             @notFavourite($property)
-                @can('addToWishlist', $property)
+                @can('addFavourite', $property)
                     <form action="{{ route('wishlist.add', ['property' => $property->id]) }}" method="post">
                         @csrf
                         <button class="btn btn-sm border-bottom px-2 me-1">

@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\Image;
 use App\Services\ImageService;
+use Illuminate\Http\RedirectResponse;
 
 class ImageController extends Controller
 {
@@ -11,7 +12,7 @@ class ImageController extends Controller
     {
     }
 
-    public function delete(Image $image)
+    public function delete(Image $image): RedirectResponse
     {
         $this->imageService->delete($image);
 

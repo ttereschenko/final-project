@@ -4,10 +4,12 @@ namespace App\Http\Controllers;
 
 use App\Models\Property;
 use App\Models\User;
+use Illuminate\Contracts\View\View;
+use Illuminate\Http\RedirectResponse;
 
 class OwnerController extends Controller
 {
-    public function changeRole()
+    public function changeRole(): RedirectResponse
     {
         $user = auth()->user();
 
@@ -20,7 +22,7 @@ class OwnerController extends Controller
         return redirect()->route('property.create');
     }
 
-    public function createdAnnouncementList()
+    public function createdAnnouncementList(): View
     {
         $user = auth()->user();
 

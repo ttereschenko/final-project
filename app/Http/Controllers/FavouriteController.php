@@ -5,6 +5,8 @@ namespace App\Http\Controllers;
 use App\Models\Favourite;
 use App\Models\Property;
 use App\Services\FavouriteService;
+use Illuminate\Contracts\View\View;
+use Illuminate\Http\RedirectResponse;
 
 class FavouriteController extends Controller
 {
@@ -12,7 +14,7 @@ class FavouriteController extends Controller
     {
     }
 
-    public function wishlist()
+    public function wishlist(): View
     {
         $user = auth()->user();
 
@@ -23,7 +25,7 @@ class FavouriteController extends Controller
         return view('wishlist', compact('favourites'));
     }
 
-    public function add(Property $property)
+    public function add(Property $property): RedirectResponse
     {
         $user = auth()->user();
 
@@ -34,7 +36,7 @@ class FavouriteController extends Controller
         return redirect()->back();
     }
 
-    public function delete(Property $property)
+    public function delete(Property $property): RedirectResponse
     {
         $user = auth()->user();
 

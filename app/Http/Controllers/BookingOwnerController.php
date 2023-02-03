@@ -5,6 +5,8 @@ namespace App\Http\Controllers;
 use App\Models\Booking;
 use App\Models\Property;
 use App\Services\BookingService;
+use Illuminate\Contracts\View\View;
+use Illuminate\Http\RedirectResponse;
 
 class BookingOwnerController extends Controller
 {
@@ -12,7 +14,7 @@ class BookingOwnerController extends Controller
     {
     }
 
-    public function list()
+    public function list(): View
     {
         $user = auth()->user();
 
@@ -24,12 +26,12 @@ class BookingOwnerController extends Controller
         return view('booking.owner.list', compact('properties'));
     }
 
-    public function show(Booking $booking)
+    public function show(Booking $booking): View
     {
         return view('booking.owner.request', compact('booking'));
     }
 
-    public function confirm(Booking $booking)
+    public function confirm(Booking $booking): RedirectResponse
     {
         $this->bookingService->confirm($booking);
 
@@ -38,7 +40,7 @@ class BookingOwnerController extends Controller
         return redirect()->route('main');
     }
 
-    public function cancel(Booking $booking)
+    public function cancel(Booking $booking): RedirectResponse
     {
         $this->bookingService->cancel($booking);
 

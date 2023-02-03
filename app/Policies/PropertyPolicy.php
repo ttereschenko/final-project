@@ -20,12 +20,12 @@ class PropertyPolicy
         return $user->id === $property->user_id ||  $user->role === User::ROLE_ADMIN;
     }
 
-    public function addToWishlist(User $user, Property $property): bool
+    public function addFavourite(User $user, Property $property): bool
     {
         return $user->id !== $property->user_id;
     }
 
-    public function deleteFromWishlist(User $user, Property $property): bool
+    public function deleteFavourite(User $user, Property $property): bool
     {
         return $user->id !== $property->user_id;
     }

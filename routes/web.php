@@ -145,10 +145,10 @@ Route::controller(FavouriteController::class)->group(function () {
     Route::group(['prefix' => '/wishlist/{property}', 'as' => 'wishlist.'], function () {
 
         Route::post('/add', 'add')->name('add')
-            ->middleware('auth', 'can:addToWishlist,property');
+            ->middleware('auth', 'can:addFavourite,property');
 
         Route::post('/delete', 'delete')->name('delete')
-            ->middleware('auth', 'can:deleteFromWishlist,property');
+            ->middleware('auth', 'can:deleteFavourite,property');
     });
 });
 
@@ -166,13 +166,13 @@ Route::controller(BookingOwnerController::class)->group(function () {
     Route::group(['prefix' => '/booking/{booking}', 'as' => 'booking.'], function () {
 
         Route::get('', 'show')->name('request')
-            ->middleware('auth');
+            ->middleware('auth', 'can:show,booking');
 
         Route::post('/confirm', 'confirm')->name('confirm')
-            ->middleware('auth');
+            ->middleware('auth', 'can:confirm,booking');
 
         Route::post('/cancel', 'cancel')->name('cancel')
-            ->middleware('auth');
+            ->middleware('auth', 'can:cancel,booking');
     });
 });
 

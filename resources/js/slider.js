@@ -1,8 +1,7 @@
 import '@splidejs/splide/css';
 import Splide from '@splidejs/splide';
 
-let elements = document.getElementsByClassName( 'splide',{
-});
+let elements = document.getElementsByClassName( 'splide');
 
 for ( let i = 0; i < elements.length; i++ ) {
     new Splide( elements[ i ] ).mount();

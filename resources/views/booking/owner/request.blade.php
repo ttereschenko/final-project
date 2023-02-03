@@ -20,14 +20,18 @@
                         </p>
                         <p>Guests: {{ $booking->guests }}</p>
                         <p>Total Price: ${{ $booking->total_price }}</p>
-                        <form action="{{ route('booking.confirm', ['booking' => $booking->id]) }}" method="post">
-                            @csrf
-                            <button class="btn btn-dark fw-light w-100">Confirm</button>
-                        </form>
-                        <form action="{{ route('booking.cancel', ['booking' => $booking->id]) }}" method="post">
-                            @csrf
-                            <button class="btn fw-light w-100 text-decoration-underline mt-2">Reject</button>
-                        </form>
+                        @can('confirm', $booking)
+                            <form action="{{ route('booking.confirm', ['booking' => $booking->id]) }}" method="post">
+                                @csrf
+                                <button class="btn btn-dark fw-light w-100">Confirm</button>
+                            </form>
+                        @endcan
+                        @can('cancel', $booking)
+                            <form action="{{ route('booking.cancel', ['booking' => $booking->id]) }}" method="post">
+                                @csrf
+                                <button class="btn fw-light w-100 text-decoration-underline mt-2">Reject</button>
+                            </form>
+                        @endcan
                     </div>
                     <div class="col-6">
                         @include('property.card', $property = $booking->property)
