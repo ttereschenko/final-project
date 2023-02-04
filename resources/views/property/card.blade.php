@@ -1,4 +1,4 @@
-<div class="col mb-4">
+<div class="col-lg mb-4">
     <div class="card shadow-sm">
         <section id="image-carousel" class="splide" aria-label="apartment-photo">
             <div class="splide__track">

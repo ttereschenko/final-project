@@ -11,7 +11,7 @@
             @if($favourites->isEmpty())
                 <p class="my-2">Add some <a href="{{ route('property.list') }}" class="link-dark">announcements</a> to your Wishlist</p>
             @endif
-            <div class="row row-cols-4 mt-3">
+            <div class="row row-cols-lg-4 mt-3">
                 @foreach($favourites as $favourite)
                     @include('property.card', $property = $favourite->property)
                 @endforeach

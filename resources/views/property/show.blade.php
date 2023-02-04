@@ -8,8 +8,8 @@
     </script>
     <div class="container my-4">
         <div class="row">
-            <h3 class="heading col-10">{{ $property->title }}</h3>
-            <div class="col-2 d-flex justify-content-end">
+            <h3 class="heading col-lg-10">{{ $property->title }}</h3>
+            <div class="col-lg-2 d-flex justify-content-end">
             @favourite($property)
                 @can('deleteFavourite', $property)
                     <form action="{{ route('wishlist.delete', ['property' => $property->id]) }}" method="post">
@@ -40,7 +40,7 @@
         </div>
         <p class="text-muted">Location: {{ $property->country->name }}, {{ $property->city->name }}</p>
         <div class="row d-flex justify-content-between">
-        <div class="my-3 col-8">
+        <div class="my-3 col-lg-8">
             <section id="main-slider" class="splide gallery" aria-label="My Awesome Gallery">
                 <div class="splide__track">
                     <ul class="splide__list">
@@ -54,7 +54,7 @@
             </section>
         </div>
         @can('reserve', $property)
-            <div class="col-4 card my-3 py-2 shadow">
+            <div class="col-lg-4 card my-3 py-2 shadow">
                 <h5 class="heading text-center my-4">book this apartment</h5>
                 <form action="{{ route('booking.create', ['property' => $property->id]) }}" method="post">
                     @csrf

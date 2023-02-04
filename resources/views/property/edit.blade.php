@@ -21,7 +21,7 @@
                   enctype="multipart/form-data">
                 @csrf
                 <div class="row justify-content-between">
-                    <div class="col-7">
+                    <div class="col-lg-7">
                         <h5 class="mt-4">Main Information</h5>
                         <div class="form-floating my-2">
                             <input type="text" class="form-control @error('title') is-invalid @enderror" name="title"
@@ -130,7 +130,7 @@
                             @enderror
                         </div>
                     </div>
-                    <div class="col-5">
+                    <div class="col-lg-5">
                         <h5 class="mt-4">Cost</h5>
                         <div class="row">
                             <div class="form-floating col-6">

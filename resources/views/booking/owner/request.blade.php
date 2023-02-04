@@ -8,7 +8,7 @@
             <div class="heading text-center">
                 <h3 class="m-4">Booking Confirmation</h3>
             </div>
-            <div class="col-6 mx-auto my-3">
+            <div class="col-lg-6 mx-auto my-3">
                 <div class="row justify-content-between">
                     <div class="col-6">
                         <p>Name: {{ $booking->user->name }}</p>
@@ -33,7 +33,7 @@
                             </form>
                         @endcan
                     </div>
-                    <div class="col-6">
+                    <div class="col-lg-6">
                         @include('property.card', $property = $booking->property)
                     </div>
                     </div>

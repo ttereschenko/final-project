@@ -11,7 +11,7 @@
             @if($bookings->isEmpty())
                 <p class="my-2"><a href="{{ route('property.list') }}" class="link-dark">Let's travel!</a></p>
             @endif
-            <div class="row row-cols-4 mt-3">
+            <div class="row row-cols-lg-4 mt-3">
                 @foreach($bookings as $booking)
                     <div class="col mb-4">
                         <p class="m-0">

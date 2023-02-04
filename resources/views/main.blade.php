@@ -9,7 +9,7 @@
                 <h2 class="heading text-white text-center pt-5">Let's find your dream apartment</h2>
             </div>
             <div class="row my-4">
-                <form action="{{ route('property.list') }}" class="d-flex justify-content-center mb-5">
+                <form action="{{ route('property.list') }}" class="d-lg-flex justify-content-lg-center mb-5">
                     <div class="form-floating m-2 col-lg-3">
                         <input type="text" class="form-control"
                                placeholder="Where do you want to go?" name="location">
@@ -17,7 +17,7 @@
                             <i class="bi bi-geo-alt me-2"></i>Where do you want to go?
                         </label>
                     </div>
-                    <div class="input-group w-25 m-2">
+                    <div class="input-group w-auto m-2">
                         <div class="form-floating">
                             <input type="text" class="form-control" placeholder="Check-in" name="check_in_date">
                             <label class="text-muted" for="check_in_date">

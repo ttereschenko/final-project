@@ -5,7 +5,7 @@
 @section('content')
     <div class="container">
         <div class="d-flex justify-content-end my-4">
-            <div class="heading text-center col-10">
+            <div class="heading text-center col-lg-10">
                 <h4 class="my-1">All Features</h4>
             </div>
             <a href="{{ route('facility.create') }}" class="btn btn-dark fw-light">

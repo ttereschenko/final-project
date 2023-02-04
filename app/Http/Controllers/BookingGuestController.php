@@ -29,7 +29,7 @@ class BookingGuestController extends Controller
     public function createRequest(Property $property, CreateRequest $request): RedirectResponse
     {
         $data = $request->validated();
-        $user = auth()->user();
+        $user = $request->user();
         $bookedProperty = $this->bookingService->create($data, $property, $user);
 
         if ($bookedProperty) {

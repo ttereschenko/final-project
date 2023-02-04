@@ -51,7 +51,6 @@ Route::controller(PropertyController::class)->group(function () {
 
            Route::post('/delete', 'delete')->name('delete')
                ->middleware('auth','can:delete,property');
-
        });
    });
 });
@@ -136,7 +135,6 @@ Route::controller(OwnerController::class)->group(function () {
 
     Route::get('/my-announcements', 'createdAnnouncementList')->name('owner.property.list')
         ->middleware('auth');
-
 });
 
 Route::controller(FavouriteController::class)->group(function () {

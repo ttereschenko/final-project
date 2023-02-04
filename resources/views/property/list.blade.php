@@ -16,7 +16,7 @@
                 @if($properties->isEmpty())
                     <p>Any announcement wasn't found</p>
                 @endif
-                <div class="row row-cols-3 mt-3">
+                <div class="row row-cols-lg-3 mt-3">
                     @foreach($properties as $property)
                         @include('property.card')
                     @endforeach

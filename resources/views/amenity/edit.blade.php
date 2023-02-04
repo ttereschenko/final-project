@@ -5,7 +5,7 @@
 @section('content')
     <div class="container">
         <div class="row">
-            <div class="col-4 mx-auto my-5">
+            <div class="col-lg-4 mx-auto my-5">
                 <h4 class="heading text-center my-4">edit amenity</h4>
                 <form action="{{ route('amenity.edit', ['amenity' => $amenity->id]) }}" method="post">
                     @csrf

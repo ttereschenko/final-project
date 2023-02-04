@@ -5,7 +5,7 @@
 @section('content')
     <div class="container">
         <div class="row">
-            <div class="col-4 mx-auto my-5">
+            <div class="col-lg-4 mx-auto my-5">
                 <h4 class="heading text-center my-4">add new amenity</h4>
                 <form action="{{ route('amenity.create') }}" method="post">
                     @csrf
