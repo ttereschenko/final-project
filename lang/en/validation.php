@@ -186,7 +186,7 @@ return [
         'guests' => 'Guests',
         'price' => 'Price',
         'currency' => 'Currency',
-        'image' => 'Image',
+        'image' => 'Images',
         'rooms' => 'Rooms',
         'amenities' => 'Amenities',
         'types' => 'Property Types',
