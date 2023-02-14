@@ -2,7 +2,7 @@
     <div class="card shadow-sm">
         <section id="image-carousel" class="splide" aria-label="apartment-photo">
             <div class="splide__track">
-                <ul class="splide__list">
+                <ul class="splide__list list-unstyled">
                     @foreach($property->images as $image)
                         <li class="splide__slide">
                             <img src="{{ asset($image->url) }}" class="d-block card-img-top" alt="apartment-photo">

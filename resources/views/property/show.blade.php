@@ -43,7 +43,7 @@
         <div class="my-3 col-lg-8">
             <section id="main-slider" class="splide gallery" aria-label="My Awesome Gallery">
                 <div class="splide__track">
-                    <ul class="splide__list">
+                    <ul class="splide__list list-unstyled">
                         @foreach($property->images as $image)
                             <li class="splide__slide w-100">
                                 <img src="{{ asset($image->url) }}" class="img-fluid">
